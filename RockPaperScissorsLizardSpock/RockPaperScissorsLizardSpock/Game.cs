@@ -42,11 +42,32 @@ namespace RockPaperScissorsLizardSpock
                 player1.shootRound = round.ManualShoot(player1);
                 player2.shootRound = round.GetShoot(gameType, player2);
                 helper.OutputShoot(player1, player2);
-                ScoreRound(player1, player2);
+                ScoreRoundAlgorithm(player1, player2);
                 helper.OutputRoundSummary(player1, player2);
             }
 
             helper.OutputGameEnd(player1, player2);
+        }
+
+        void ScoreRoundAlgorithm(Player player1, Player player2)
+        {
+            int check = (5 + (player1.shootRoundNum-1) - (player2.shootRoundNum-1)) % 5;
+
+            if(check == 1 || check == 3)
+            {
+                player1.UpdateScore();
+                helper.OutputWinner(player1.name);
+            }
+            else if(check == 2 || check == 4)
+            {
+                player2.UpdateScore();
+                helper.OutputWinner(player2.name);
+            }
+            else
+            {
+                helper.OutputTie();
+            }
+
         }
 
         void ScoreRound(Player player1, Player player2)

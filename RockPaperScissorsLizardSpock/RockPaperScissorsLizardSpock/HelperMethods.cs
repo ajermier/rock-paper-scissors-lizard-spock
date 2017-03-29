@@ -52,7 +52,6 @@ namespace RockPaperScissorsLizardSpock
             player1.GetPlayerName();
             Console.WriteLine();
             player2.name = "Computer";
-            Console.WriteLine();
         }
 
         public void Get2PlayerNames(Player player1, Player player2)

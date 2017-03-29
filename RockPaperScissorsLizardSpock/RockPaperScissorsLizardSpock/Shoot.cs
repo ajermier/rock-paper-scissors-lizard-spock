@@ -34,25 +34,26 @@ namespace RockPaperScissorsLizardSpock
         public string AutoShoot(Player player)
         {
             Random number = new Random();
-            int choice = number.Next(1, 6);
-            return GetShootResult(choice, player);
+            player.shootRoundNum = number.Next(1, 6);
+            return GetShootResult(player.shootRoundNum, player);
         }
 
         int SelectShoot(Player player)
         {
-            int choice;
 
             Console.WriteLine($"{player.name}, Select shoot below:");
             Console.WriteLine("1- Rock");
             Console.WriteLine("2- Paper");
             Console.WriteLine("3- Scissors");
-            Console.WriteLine("4- Lizard");
-            Console.WriteLine("5- Spock");
+            Console.WriteLine("4- Spock");
+            Console.WriteLine("5- Lizard");
 
-            choice = helper.GetInput();
+            player.shootRoundNum = helper.GetInput();
+
+            Console.Clear();
 
             Console.WriteLine();
-            return choice;
+            return player.shootRoundNum;
         }
 
         string GetShootResult(int number, Player player)
@@ -69,10 +70,10 @@ namespace RockPaperScissorsLizardSpock
                     result = "Scissors";
                     break;
                 case 4:
-                    result = "Lizard";
+                    result = "Spock";
                     break;
                 case 5:
-                    result = "Spock";
+                    result = "Lizard";
                     break;
                 default:
                     Console.WriteLine("Enter a '1', '2', '3', '4' or '5'.");
