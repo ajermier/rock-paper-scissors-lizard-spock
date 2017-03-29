@@ -10,27 +10,39 @@ namespace RockPaperScissorsLizardSpock
     {
         //member variables
         HelperMethods helper = new HelperMethods();
+        string result;
 
         //constructors
 
         //methods
-        public int ManualShoot()
+        public string GetShoot(int gameType, Player player)
         {
-            return GetShootResult(SelectShoot());
+            if (gameType == 1)
+            {
+                return AutoShoot(player);
+            }
+            else
+            {
+                return ManualShoot(player);
+            }
+        }
+        public string ManualShoot(Player player)
+        {
+            return GetShootResult(SelectShoot(player), player);
         }
 
-        public int AutoShoot()
+        public string AutoShoot(Player player)
         {
             Random number = new Random();
             int choice = number.Next(1, 6);
-            return GetShootResult(choice);
+            return GetShootResult(choice, player);
         }
 
-        int SelectShoot()
+        int SelectShoot(Player player)
         {
             int choice;
 
-            Console.WriteLine("Select shoot below:");
+            Console.WriteLine($"{player.name}, Select shoot below:");
             Console.WriteLine("1- Rock");
             Console.WriteLine("2- Paper");
             Console.WriteLine("3- Scissors");
@@ -43,31 +55,31 @@ namespace RockPaperScissorsLizardSpock
             return choice;
         }
 
-        int GetShootResult(int selectedChoice)
+        string GetShootResult(int number, Player player)
         {
-            switch (selectedChoice)
+            switch (number)
             {
                 case 1:
-                    Console.WriteLine("Rock selected.");
+                    result = "Rock";
                     break;
                 case 2:
-                    Console.WriteLine("Paper selected.");
+                    result = "Paper";
                     break;
                 case 3:
-                    Console.WriteLine("Scissors selected.");
+                    result = "Scissors";
                     break;
                 case 4:
-                    Console.WriteLine("Lizard selected.");
+                    result = "Lizard";
                     break;
                 case 5:
-                    Console.WriteLine("Spock selected.");
+                    result = "Spock";
                     break;
                 default:
                     Console.WriteLine("Enter a '1', '2', '3', '4' or '5'.");
-                    SelectShoot();
+                    SelectShoot(player);
                     break;
             }
-            return selectedChoice;
+            return result;
         }
     }
 }

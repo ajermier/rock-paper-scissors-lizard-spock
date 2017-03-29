@@ -11,12 +11,14 @@ namespace RockPaperScissorsLizardSpock
         //member variables
         public string name;
         public int score = 0;
+        public string shootRound;
 
         //constructors
-        public Player(string name, int score)
+        public Player(string name, int score, string shootRound)
         {
             this.name = GetPlayerName();
             this.score = score;
+            this.shootRound = shootRound;
         }
         
         public Player()

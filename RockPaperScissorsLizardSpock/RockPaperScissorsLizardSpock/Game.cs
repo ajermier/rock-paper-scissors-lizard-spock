@@ -20,64 +20,90 @@ namespace RockPaperScissorsLizardSpock
         //methods
         public void BeginGame()
         {
-            GameTitle();
-            gameType = SelectGameType();
+            helper.GameTitle();
+            gameType = helper.SelectGameType();
 
             if (gameType == 1)
             {
-                Console.WriteLine("Enter player name:");
-                player1.GetPlayerName();
-                GetOnePlayerGame();
+                helper.Get1PlayerNames(player1, player2);
             }
             else
             {
-                Console.WriteLine("Enter player1 name:");
-                player1.GetPlayerName();
-                Console.WriteLine("Enter player2 name:");
-                player2.GetPlayerName();
-                //GetTwoPlayerGame();
+                helper.Get2PlayerNames(player1, player2);
             }
-        }
-        int SelectGameType()
-        {
-            int choice;
 
-            Console.WriteLine("1- Single player");
-            Console.WriteLine("2- Multiplayer");
-            choice = helper.GetInput();
-
-            switch (choice)
-            {
-                case 1:
-                    Console.WriteLine("Single player selected.");
-                    break;
-                case 2:
-                    Console.WriteLine("Multiplayer selected.");
-                    break;
-                default:
-                    Console.WriteLine("Enter a '1' or '2'.");
-                    SelectGameType();
-                    break;
-            }
-            Console.WriteLine();
-            return choice;
-
+            GetGame(player1, player2);
         }
 
-        void GameTitle()
-        {
-            Console.WriteLine("-----Rock-Paper-Scisors-Lizard-Spock-----");
-            Console.WriteLine();
-            Console.WriteLine("Select game type below:");
-        }
-
-        void GetOnePlayerGame()
+        void GetGame(Player player1, Player player2)
         {
             while (player1.score < 3 && player2.score < 3)
             {
+                player1.shootRound = round.ManualShoot(player1);
+                player2.shootRound = round.GetShoot(gameType, player2);
+                helper.OutputShoot(player1, player2);
+                ScoreRound(player1, player2);
+                helper.OutputRoundSummary(player1, player2);
+            }
 
-                Console.WriteLine($"{player1.name}'s result " + round.ManualShoot());
-                Console.WriteLine("Computer's result " + round.AutoShoot());
+            helper.OutputGameEnd(player1, player2);
+        }
+
+        void ScoreRound(Player player1, Player player2)
+        {
+            if(player1.shootRound == player2.shootRound)
+            {
+                helper.OutputTie();
+            }
+            else if (player1.shootRound == "Scissors" && (player2.shootRound == "Paper" || player2.shootRound == "Lizard"))
+            {
+                player1.UpdateScore();
+                helper.OutputWinner(player1.name);
+            }
+            else if (player2.shootRound == "Scissors" && (player1.shootRound == "Paper" || player1.shootRound == "Lizard"))
+            {
+                player2.UpdateScore();
+                helper.OutputWinner(player2.name);
+            }
+            else if (player1.shootRound == "Paper" && (player2.shootRound == "Rock" || player2.shootRound == "Spock"))
+            {
+                player1.UpdateScore();
+                helper.OutputWinner(player1.name);
+            }
+            else if (player2.shootRound == "Paper" && (player1.shootRound == "Rock" || player1.shootRound == "Spock"))
+            {
+                player2.UpdateScore();
+                helper.OutputWinner(player2.name);
+            }
+            else if (player1.shootRound == "Rock" && (player2.shootRound == "Lizard" || player2.shootRound == "Scissors"))
+            {
+                player1.UpdateScore();
+                helper.OutputWinner(player1.name);
+            }
+            else if (player2.shootRound == "Rock" && (player1.shootRound == "Lizard" || player1.shootRound == "Scissors"))
+            {
+                player2.UpdateScore();
+                helper.OutputWinner(player2.name);
+            }
+            else if (player1.shootRound == "Lizard" && (player2.shootRound == "Spock" || player2.shootRound == "Paper"))
+            {
+                player1.UpdateScore();
+                helper.OutputWinner(player1.name);
+            }
+            else if (player2.shootRound == "Lizard" && (player1.shootRound == "Spock" || player1.shootRound == "Paper"))
+            {
+                player2.UpdateScore();
+                helper.OutputWinner(player2.name);
+            }
+            else if (player1.shootRound == "Spock" && (player2.shootRound == "Scissors" || player2.shootRound == "Rock"))
+            {
+                player1.UpdateScore();
+                helper.OutputWinner(player1.name);
+            }
+            else if (player2.shootRound == "Spock" && (player1.shootRound == "Scissors" || player1.shootRound == "Rock"))
+            {
+                player2.UpdateScore();
+                helper.OutputWinner(player2.name);
             }
         }
     }
