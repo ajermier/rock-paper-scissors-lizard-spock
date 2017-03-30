@@ -16,6 +16,11 @@ namespace RockPaperScissorsLizardSpock
         private HelperMethods helper;
 
         //constructors        
+        public Player()
+        {
+
+        }
+
         public Player (string id)
         {
             score = 0;
