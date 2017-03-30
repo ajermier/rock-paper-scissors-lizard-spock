@@ -11,6 +11,10 @@ namespace RockPaperScissorsLizardSpock
         //member variables
 
         //constructors
+        public HelperMethods()
+        {
+
+        }
 
         //methods
         public void GameTitle()
@@ -46,39 +50,23 @@ namespace RockPaperScissorsLizardSpock
             return choice;
         }
 
-        public void Get1PlayerNames(Player player1, Player player2)
-        {
-            Console.WriteLine("Enter player name:");
-            player1.GetPlayerName();
-            Console.WriteLine();
-            player2.name = "Computer";
-        }
-
-        public void Get2PlayerNames(Player player1, Player player2)
-        {
-            Console.WriteLine("Enter player1 name:");
-            player1.GetPlayerName();
-            Console.WriteLine();
-            Console.WriteLine("Enter player2 name:");
-            player2.GetPlayerName();
-            Console.WriteLine();
-        }
-
         public void OutputShoot(Player player1, Player player2)
         {
             Console.WriteLine("Press Enter to Shoot");
             Console.ReadLine();
-            Console.WriteLine($"{player1.name} shoots " + player1.shootRound);
-            Console.WriteLine($"{player2.name} shoots " + player2.shootRound);
+            Console.WriteLine($"{player1.name} shoots " + player1.shootRoundName);
+            Console.WriteLine($"{player2.name} shoots " + player2.shootRoundName);
         }
 
         public void OutputTie()
         {
+            Console.WriteLine();
             Console.WriteLine("TIE!");
         }
 
-        public void OutputWinner(string name)
+        public void OutputRoundWinner(string name)
         {
+            Console.WriteLine();
             Console.WriteLine(name + " WINS!");
         }
 
@@ -97,7 +85,7 @@ namespace RockPaperScissorsLizardSpock
             Player winner;
             Player loser;
 
-            if(player1.score == 3)
+            if(player1.score == 2)
             {
                 winner = player1;
                 loser = player2;
